@@ -1,0 +1,483 @@
+bmsce@bmsce-Precision-T1700:~$ su hduser
+Password:
+hduser@bmsce-Precision-T1700:/home/bmsce$ cs \
+>
+
+Command 'cs' not found, but can be installed with:
+
+sudo apt install csound
+
+hduser@bmsce-Precision-T1700:/home/bmsce$ cd \
+>
+hduser@bmsce-Precision-T1700:~$ start-all.sh
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+Starting namenodes on [localhost]
+hduser@localhost's password:
+localhost: namenode running as process 6168. Stop it first.
+hduser@localhost's password:
+localhost: datanode running as process 6341. Stop it first.
+bmStarting secondary namenodes [0.0.0.0]
+hduser@0.0.0.0's password:
+bmsce
+hduser@0.0.0.0's password: 0.0.0.0: Permission denied, please try again.
+
+
+
+
+
+
+0.0.0.0: Permission denied, please try again.
+hduser@0.0.0.0's password:
+0.0.0.0: secondarynamenode running as process 6554. Stop it first.
+starting yarn daemons
+resourcemanager running as process 6713. Stop it first.
+hduser@localhost's password:
+localhost: nodemanager running as process 7045. Stop it first.
+hduser@bmsce-Precision-T1700:~$ jps
+7045 NodeManager
+6341 DataNode
+6168 NameNode
+6713 ResourceManager
+6554 SecondaryNameNode
+26827 Jps
+hduser@bmsce-Precision-T1700:~$ sudo nano samplee.txt
+[sudo] password for hduser:
+hduser@bmsce-Precision-T1700:~$ hadoop fs -ls /
+Found 7 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-15 09:17 /bdalab7
+drwxr-xr-x   - hduser supergroup          0 2022-06-14 10:32 /input
+drwxr-xr-x   - hduser supergroup          0 2022-06-15 10:01 /lab7
+drwxr-xr-x   - hduser supergroup          0 2022-06-14 10:32 /output
+drwxr-xr-x   - hduser supergroup          0 2022-06-14 10:33 /output1
+drwxr-xr-x   - hduser supergroup          0 2022-06-14 10:39 /output2
+drwxr-xr-x   - hduser supergroup          0 2022-06-14 10:27 /pankaj
+hduser@bmsce-Precision-T1700:~$ hadoop fs -copyFromLocal D:/samplee.txt  /lab7/test.txt
+copyFromLocal: `/samplee.txt': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hadoop fs -copyFromLocal D:/newfile.txt  /lab7/test.txt
+copyFromLocal: `/newfile.txt': No such file or directory
+hduser@bmsce-Precision-T1700:~$ cd /usr/local/hadoop/sbin
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -copyFromLocal D:/samplee.txt  /lab7/test.txt
+copyFromLocal: `/samplee.txt': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -copyFromLocal samplee.txt /lab7/test.txt
+copyFromLocal: `samplee.txt': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ sudo chmod -R 777
+chmod: missing operand after ‘777’
+Try 'chmod --help' for more information.
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ sudo chmod -R 777 /samplee.txt
+chmod: cannot access '/samplee.txt': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ sudo chmod -R 777 /home/bmsce/lab7txtfile.txt
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -copyFromLocal /home/bmsce/lab7txtfile.txt /lab7/test.txt
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/hduser/Desktop/wordcountt.jar WCDriverr input output
+Not a valid JAR: /home/hduser/Desktop/wordcountt.jar
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/bmsce/Desktop/wordcountt.jar WCDriverr input output
+Exception in thread "main" java.lang.ClassNotFoundException: WCDriverr
+at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+at java.lang.Class.forName0(Native Method)
+at java.lang.Class.forName(Class.java:348)
+at org.apache.hadoop.util.RunJar.run(RunJar.java:214)
+at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -ls /output/
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -cat /output part-00000
+cat: `/output': Is a directory
+cat: `part-00000': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -cat /output/part-00000
+cat: `/output/part-00000': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/hduser/Desktop/wordcountt.jar WCDriverr /home/bmsce/lab7txtfile.txt /new/output.txt
+Not a valid JAR: /home/hduser/Desktop/wordcountt.jar
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/bmsce/Desktop/wordcountt.jar WCDriverr lab7txtfile.txt output.txt
+Exception in thread "main" java.lang.ClassNotFoundException: WCDriverr
+at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+at java.lang.Class.forName0(Native Method)
+at java.lang.Class.forName(Class.java:348)
+at org.apache.hadoop.util.RunJar.run(RunJar.java:214)
+at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/bmsce/Desktop/wordcountt.jar/WCDriverr.java lab7txtfile.txt output.txt
+Not a valid JAR: /home/bmsce/Desktop/wordcountt.jar/WCDriverr.java
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/bmsce/Desktop/wordcountt.jar WCDriverr lab7txtfile.txt output.txt
+Exception in thread "main" java.lang.ClassNotFoundException: WCDriverr
+at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+at java.lang.Class.forName0(Native Method)
+at java.lang.Class.forName(Class.java:348)
+at org.apache.hadoop.util.RunJar.run(RunJar.java:214)
+at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/bmsce/Desktop/wordcountt.jar wordcountt.WCDriverr lab7/lab7txtfile.txt lab7/output.txt
+22/06/15 10:29:27 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+22/06/15 10:29:27 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+22/06/15 10:29:27 INFO jvm.JvmMetrics: Cannot initialize JVM Metrics with processName=JobTracker, sessionId= - already initialized
+22/06/15 10:29:27 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+22/06/15 10:29:27 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/app/hadoop/tmp/mapred/staging/hduser982890489/.staging/job_local982890489_0001
+Exception in thread "main" org.apache.hadoop.mapred.InvalidInputException: Input path does not exist: hdfs://localhost:54310/user/hduser/lab7/lab7txtfile.txt
+at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285)
+at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:228)
+at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:313)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeOldSplits(JobSubmitter.java:624)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeSplits(JobSubmitter.java:616)
+at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:492)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1296)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1293)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapreduce.Job.submit(Job.java:1293)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:562)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:557)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapred.JobClient.submitJobInternal(JobClient.java:557)
+at org.apache.hadoop.mapred.JobClient.submitJob(JobClient.java:548)
+at org.apache.hadoop.mapred.JobClient.runJob(JobClient.java:833)
+at wordcountt.WCDriverr.run(WCDriverr.java:33)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:84)
+at wordcountt.WCDriverr.main(WCDriverr.java:40)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -ls /lab7/output.txt
+ls: `/lab7/output.txt': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -ls /lab7/output.txt/
+ls: `/lab7/output.txt/': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -ls /output.txt/
+ls: `/output.txt/': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -ls /lab7/output.txt/
+ls: `/lab7/output.txt/': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -cat /output.txt/part-00000
+cat: `/output.txt/part-00000': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/bmsce/Desktop/wordcountt.jar wordcountt.WCDriverr lab7/lab7txtfile.txt lab7/output
+22/06/15 10:32:44 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+22/06/15 10:32:44 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+22/06/15 10:32:44 INFO jvm.JvmMetrics: Cannot initialize JVM Metrics with processName=JobTracker, sessionId= - already initialized
+22/06/15 10:32:44 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+22/06/15 10:32:45 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/app/hadoop/tmp/mapred/staging/hduser91783116/.staging/job_local91783116_0001
+Exception in thread "main" org.apache.hadoop.mapred.InvalidInputException: Input path does not exist: hdfs://localhost:54310/user/hduser/lab7/lab7txtfile.txt
+at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285)
+at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:228)
+at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:313)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeOldSplits(JobSubmitter.java:624)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeSplits(JobSubmitter.java:616)
+at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:492)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1296)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1293)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapreduce.Job.submit(Job.java:1293)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:562)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:557)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapred.JobClient.submitJobInternal(JobClient.java:557)
+at org.apache.hadoop.mapred.JobClient.submitJob(JobClient.java:548)
+at org.apache.hadoop.mapred.JobClient.runJob(JobClient.java:833)
+at wordcountt.WCDriverr.run(WCDriverr.java:33)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:84)
+at wordcountt.WCDriverr.main(WCDriverr.java:40)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop fs -cat /output/port-00000
+cat: `/output/port-00000': No such file or directory
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/bmsce/Desktop/wordcountt.jar wordcountt.WCDriverr bdalab7/lab7txtfile.txt lab7/output
+22/06/15 10:35:49 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+22/06/15 10:35:49 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+22/06/15 10:35:49 INFO jvm.JvmMetrics: Cannot initialize JVM Metrics with processName=JobTracker, sessionId= - already initialized
+22/06/15 10:35:49 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+22/06/15 10:35:49 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/app/hadoop/tmp/mapred/staging/hduser79872898/.staging/job_local79872898_0001
+Exception in thread "main" org.apache.hadoop.mapred.InvalidInputException: Input path does not exist: hdfs://localhost:54310/user/hduser/bdalab7/lab7txtfile.txt
+at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285)
+at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:228)
+at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:313)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeOldSplits(JobSubmitter.java:624)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeSplits(JobSubmitter.java:616)
+at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:492)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1296)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1293)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapreduce.Job.submit(Job.java:1293)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:562)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:557)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapred.JobClient.submitJobInternal(JobClient.java:557)
+at org.apache.hadoop.mapred.JobClient.submitJob(JobClient.java:548)
+at org.apache.hadoop.mapred.JobClient.runJob(JobClient.java:833)
+at wordcountt.WCDriverr.run(WCDriverr.java:33)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:84)
+at wordcountt.WCDriverr.main(WCDriverr.java:40)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/bmsce/Desktop/wordcountt.jar wordcountt.WCDriverr home/bmsce/bdalab7/lab7txtfile.txt lab7/output
+22/06/15 10:36:51 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+22/06/15 10:36:51 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+22/06/15 10:36:51 INFO jvm.JvmMetrics: Cannot initialize JVM Metrics with processName=JobTracker, sessionId= - already initialized
+22/06/15 10:36:51 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+22/06/15 10:36:51 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/app/hadoop/tmp/mapred/staging/hduser1528999848/.staging/job_local1528999848_0001
+Exception in thread "main" org.apache.hadoop.mapred.InvalidInputException: Input path does not exist: hdfs://localhost:54310/user/hduser/home/bmsce/bdalab7/lab7txtfile.txt
+at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285)
+at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:228)
+at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:313)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeOldSplits(JobSubmitter.java:624)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeSplits(JobSubmitter.java:616)
+at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:492)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1296)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1293)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapreduce.Job.submit(Job.java:1293)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:562)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:557)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapred.JobClient.submitJobInternal(JobClient.java:557)
+at org.apache.hadoop.mapred.JobClient.submitJob(JobClient.java:548)
+at org.apache.hadoop.mapred.JobClient.runJob(JobClient.java:833)
+at wordcountt.WCDriverr.run(WCDriverr.java:33)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:84)
+at wordcountt.WCDriverr.main(WCDriverr.java:40)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/bmsce/Desktop/wordcountt.jar wordcountt.WCDriverr home/bmsce/lab7txtfile.txt lab7/output
+22/06/15 10:37:05 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+22/06/15 10:37:05 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+22/06/15 10:37:05 INFO jvm.JvmMetrics: Cannot initialize JVM Metrics with processName=JobTracker, sessionId= - already initialized
+22/06/15 10:37:05 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+22/06/15 10:37:05 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/app/hadoop/tmp/mapred/staging/hduser476291444/.staging/job_local476291444_0001
+Exception in thread "main" org.apache.hadoop.mapred.InvalidInputException: Input path does not exist: hdfs://localhost:54310/user/hduser/home/bmsce/lab7txtfile.txt
+at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285)
+at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:228)
+at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:313)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeOldSplits(JobSubmitter.java:624)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeSplits(JobSubmitter.java:616)
+at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:492)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1296)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1293)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapreduce.Job.submit(Job.java:1293)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:562)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:557)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapred.JobClient.submitJobInternal(JobClient.java:557)
+at org.apache.hadoop.mapred.JobClient.submitJob(JobClient.java:548)
+at org.apache.hadoop.mapred.JobClient.runJob(JobClient.java:833)
+at wordcountt.WCDriverr.run(WCDriverr.java:33)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:84)
+at wordcountt.WCDriverr.main(WCDriverr.java:40)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ hadoop jar /home/bmsce/Desktop/wordcountt.jar wordcountt.WCDriverr lab7txtfile.txt lab7/output
+22/06/15 10:37:26 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+22/06/15 10:37:26 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+22/06/15 10:37:26 INFO jvm.JvmMetrics: Cannot initialize JVM Metrics with processName=JobTracker, sessionId= - already initialized
+22/06/15 10:37:26 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+22/06/15 10:37:26 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/app/hadoop/tmp/mapred/staging/hduser959591336/.staging/job_local959591336_0001
+Exception in thread "main" org.apache.hadoop.mapred.InvalidInputException: Input path does not exist: hdfs://localhost:54310/user/hduser/lab7txtfile.txt
+at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285)
+at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:228)
+at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:313)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeOldSplits(JobSubmitter.java:624)
+at org.apache.hadoop.mapreduce.JobSubmitter.writeSplits(JobSubmitter.java:616)
+at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:492)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1296)
+at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1293)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapreduce.Job.submit(Job.java:1293)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:562)
+at org.apache.hadoop.mapred.JobClient$1.run(JobClient.java:557)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+at org.apache.hadoop.mapred.JobClient.submitJobInternal(JobClient.java:557)
+at org.apache.hadoop.mapred.JobClient.submitJob(JobClient.java:548)
+at org.apache.hadoop.mapred.JobClient.runJob(JobClient.java:833)
+at wordcountt.WCDriverr.run(WCDriverr.java:33)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)
+at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:84)
+at wordcountt.WCDriverr.main(WCDriverr.java:40)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@bmsce-Precision-T1700:/usr/local/hadoop/sbin$ cd /home/bmsce/Desktop
+hduser@bmsce-Precision-T1700:/home/bmsce/Desktop$ sudo nano xyzz.txt
+[sudo] password for hduser:
+hduser@bmsce-Precision-T1700:/home/bmsce/Desktop$ hadoop fs -copyFromLocal D:/xyzz.txt  /lab7/test.txt
+copyFromLocal: `/lab7/test.txt': File exists
+hduser@bmsce-Precision-T1700:/home/bmsce/Desktop$ hadoop fs -ls /
+Found 7 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-15 09:17 /bdalab7
+drwxr-xr-x   - hduser supergroup          0 2022-06-14 10:32 /input
+drwxr-xr-x   - hduser supergroup          0 2022-06-15 10:19 /lab7
+drwxr-xr-x   - hduser supergroup          0 2022-06-14 10:32 /output
+drwxr-xr-x   - hduser supergroup          0 2022-06-14 10:33 /output1
+drwxr-xr-x   - hduser supergroup          0 2022-06-14 10:39 /output2
+drwxr-xr-x   - hduser supergroup          0 2022-06-14 10:27 /pankaj
+hduser@bmsce-Precision-T1700:/home/bmsce/Desktop$ hadoop fs -copyFromLocal D:/xyzz.txt  /bdalab7/test.txt
+copyFromLocal: `/xyzz.txt': No such file or directory
+hduser@bmsce-Precision-T1700:/home/bmsce/Desktop$ hadoop fs -copyFromLocal /home/bmsce/Desktop/xyzz.txt  /bdalab7/test.txt
+hduser@bmsce-Precision-T1700:/home/bmsce/Desktop$ hadoop jar /home/bmsce/Desktop/wordcountt.jar wordcountt.WCDriverr /bdalab7/test.txt /bdalab7/output
+22/06/15 10:43:18 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+22/06/15 10:43:18 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+22/06/15 10:43:18 INFO jvm.JvmMetrics: Cannot initialize JVM Metrics with processName=JobTracker, sessionId= - already initialized
+22/06/15 10:43:18 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+22/06/15 10:43:18 INFO mapred.FileInputFormat: Total input paths to process : 1
+22/06/15 10:43:18 INFO mapreduce.JobSubmitter: number of splits:1
+22/06/15 10:43:19 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local765140197_0001
+22/06/15 10:43:19 INFO mapreduce.Job: The url to track the job: http://localhost:8080/
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: OutputCommitter set in config null
+22/06/15 10:43:19 INFO mapreduce.Job: Running job: job_local765140197_0001
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: OutputCommitter is org.apache.hadoop.mapred.FileOutputCommitter
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: Waiting for map tasks
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: Starting task: attempt_local765140197_0001_m_000000_0
+22/06/15 10:43:19 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+22/06/15 10:43:19 INFO mapred.MapTask: Processing split: hdfs://localhost:54310/bdalab7/test.txt:0+70
+22/06/15 10:43:19 INFO mapred.MapTask: numReduceTasks: 1
+22/06/15 10:43:19 INFO mapred.MapTask: (EQUATOR) 0 kvi 26214396(104857584)
+22/06/15 10:43:19 INFO mapred.MapTask: mapreduce.task.io.sort.mb: 100
+22/06/15 10:43:19 INFO mapred.MapTask: soft limit at 83886080
+22/06/15 10:43:19 INFO mapred.MapTask: bufstart = 0; bufvoid = 104857600
+22/06/15 10:43:19 INFO mapred.MapTask: kvstart = 26214396; length = 6553600
+22/06/15 10:43:19 INFO mapred.MapTask: Map output collector class = org.apache.hadoop.mapred.MapTask$MapOutputBuffer
+22/06/15 10:43:19 INFO mapred.LocalJobRunner:
+22/06/15 10:43:19 INFO mapred.MapTask: Starting flush of map output
+22/06/15 10:43:19 INFO mapred.MapTask: Spilling map output
+22/06/15 10:43:19 INFO mapred.MapTask: bufstart = 0; bufend = 129; bufvoid = 104857600
+22/06/15 10:43:19 INFO mapred.MapTask: kvstart = 26214396(104857584); kvend = 26214340(104857360); length = 57/6553600
+22/06/15 10:43:19 INFO mapred.MapTask: Finished spill 0
+22/06/15 10:43:19 INFO mapred.Task: Task:attempt_local765140197_0001_m_000000_0 is done. And is in the process of committing
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: hdfs://localhost:54310/bdalab7/test.txt:0+70
+22/06/15 10:43:19 INFO mapred.Task: Task 'attempt_local765140197_0001_m_000000_0' done.
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: Finishing task: attempt_local765140197_0001_m_000000_0
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: map task executor complete.
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: Waiting for reduce tasks
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: Starting task: attempt_local765140197_0001_r_000000_0
+22/06/15 10:43:19 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+22/06/15 10:43:19 INFO mapred.ReduceTask: Using ShuffleConsumerPlugin: org.apache.hadoop.mapreduce.task.reduce.Shuffle@5a77ade5
+22/06/15 10:43:19 INFO reduce.MergeManagerImpl: MergerManager: memoryLimit=334338464, maxSingleShuffleLimit=83584616, mergeThreshold=220663392, ioSortFactor=10, memToMemMergeOutputsThreshold=10
+22/06/15 10:43:19 INFO reduce.EventFetcher: attempt_local765140197_0001_r_000000_0 Thread started: EventFetcher for fetching Map Completion Events
+22/06/15 10:43:19 INFO reduce.LocalFetcher: localfetcher#1 about to shuffle output of map attempt_local765140197_0001_m_000000_0 decomp: 161 len: 165 to MEMORY
+22/06/15 10:43:19 INFO reduce.InMemoryMapOutput: Read 161 bytes from map-output for attempt_local765140197_0001_m_000000_0
+22/06/15 10:43:19 INFO reduce.MergeManagerImpl: closeInMemoryFile -> map-output of size: 161, inMemoryMapOutputs.size() -> 1, commitMemory -> 0, usedMemory ->161
+22/06/15 10:43:19 INFO reduce.EventFetcher: EventFetcher is interrupted.. Returning
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: 1 / 1 copied.
+22/06/15 10:43:19 INFO reduce.MergeManagerImpl: finalMerge called with 1 in-memory map-outputs and 0 on-disk map-outputs
+22/06/15 10:43:19 INFO mapred.Merger: Merging 1 sorted segments
+22/06/15 10:43:19 INFO mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 155 bytes
+22/06/15 10:43:19 INFO reduce.MergeManagerImpl: Merged 1 segments, 161 bytes to disk to satisfy reduce memory limit
+22/06/15 10:43:19 INFO reduce.MergeManagerImpl: Merging 1 files, 165 bytes from disk
+22/06/15 10:43:19 INFO reduce.MergeManagerImpl: Merging 0 segments, 0 bytes from memory into reduce
+22/06/15 10:43:19 INFO mapred.Merger: Merging 1 sorted segments
+22/06/15 10:43:19 INFO mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 155 bytes
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: 1 / 1 copied.
+22/06/15 10:43:19 INFO mapred.Task: Task:attempt_local765140197_0001_r_000000_0 is done. And is in the process of committing
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: 1 / 1 copied.
+22/06/15 10:43:19 INFO mapred.Task: Task attempt_local765140197_0001_r_000000_0 is allowed to commit now
+22/06/15 10:43:19 INFO output.FileOutputCommitter: Saved output of task 'attempt_local765140197_0001_r_000000_0' to hdfs://localhost:54310/bdalab7/output/_temporary/0/task_local765140197_0001_r_000000
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: reduce > reduce
+22/06/15 10:43:19 INFO mapred.Task: Task 'attempt_local765140197_0001_r_000000_0' done.
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: Finishing task: attempt_local765140197_0001_r_000000_0
+22/06/15 10:43:19 INFO mapred.LocalJobRunner: reduce task executor complete.
+22/06/15 10:43:20 INFO mapreduce.Job: Job job_local765140197_0001 running in uber mode : false
+22/06/15 10:43:20 INFO mapreduce.Job:  map 100% reduce 100%
+22/06/15 10:43:20 INFO mapreduce.Job: Job job_local765140197_0001 completed successfully
+22/06/15 10:43:20 INFO mapreduce.Job: Counters: 38
+File System Counters
+FILE: Number of bytes read=8746
+FILE: Number of bytes written=508017
+FILE: Number of read operations=0
+FILE: Number of large read operations=0
+FILE: Number of write operations=0
+HDFS: Number of bytes read=140
+HDFS: Number of bytes written=56
+HDFS: Number of read operations=13
+HDFS: Number of large read operations=0
+HDFS: Number of write operations=4
+Map-Reduce Framework
+Map input records=5
+Map output records=15
+Map output bytes=129
+Map output materialized bytes=165
+Input split bytes=91
+Combine input records=0
+Combine output records=0
+Reduce input groups=8
+Reduce shuffle bytes=165
+Reduce input records=15
+Reduce output records=8
+Spilled Records=30
+Shuffled Maps =1
+Failed Shuffles=0
+Merged Map outputs=1
+GC time elapsed (ms)=2
+CPU time spent (ms)=0
+Physical memory (bytes) snapshot=0
+Virtual memory (bytes) snapshot=0
+Total committed heap usage (bytes)=473956352
+Shuffle Errors
+BAD_ID=0
+CONNECTION=0
+IO_ERROR=0
+WRONG_LENGTH=0
+WRONG_MAP=0
+WRONG_REDUCE=0
+File Input Format Counters
+Bytes Read=70
+File Output Format Counters
+Bytes Written=56
+0
+hduser@bmsce-Precision-T1700:/home/bmsce/Desktop$ hadoop fs -ls /bdalab7/output/
+Found 2 items
+-rw-r--r--   1 hduser supergroup          0 2022-06-15 10:43 /bdalab7/output/_SUCCESS
+-rw-r--r--   1 hduser supergroup         56 2022-06-15 10:43 /bdalab7/output/part-00000
+hduser@bmsce-Precision-T1700:/home/bmsce/Desktop$ hadoop fs -cat /bdalab7/output/part-00000
+are 2
+family 1
+how 4
+is 2
+job 1
+siblings 1
+you 1
+your 3
+hduser@bmsce-Precision-T1700:/home/bmsce/Desktop$
